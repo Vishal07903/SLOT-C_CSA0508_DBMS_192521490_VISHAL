@@ -1,0 +1,552 @@
+Enter password: ***********
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 14
+Server version: 8.0.46 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2026, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> # CSA05 – DBMS Scenario-Based Assessment
+mysql>
+mysql> Analytical Problem-Solving – Professional Format
+mysql>
+mysql> ---
+    
+     1. School Management System – Student, Teacher and Grade
+    
+     Analytical Approach
+    
+     The system must maintain students, teachers, and their grades. A student belongs to a class/teacher, and each student receives a grade.
+    
+     Relational Schema
+    
+     ```sql
+    CREATE TABLE Teacher (
+        TeacherID INT PRIMARY KEY,
+        TeacherName VARCHAR(50),
+        Subject VARCHAR(50)
+    );
+   
+    CREATE TABLE Student (
+        StudentID INT PRIMARY KEY,
+        StudentName VARCHAR(50),
+        TeacherID INT,
+        Grade CHAR(2),
+        FOREIGN KEY (TeacherID) REFERENCES Teacher(TeacherID)
+    );
+    ```
+    
+     SQL Query
+    
+     ```sql
+    SELECT
+        s.StudentID,
+        s.StudentName,
+        t.TeacherName,
+        s.Grade
+    FROM Student s
+    JOIN Teacher t
+    ON s.TeacherID = t.TeacherID;
+    ```
+    
+     Result
+    
+     The query displays each student's name, assigned teacher, and grade by joining the `Student` and `Teacher` relations using `TeacherID`.
+    
+     ---
+    
+     # 2. Hospital Appointment System – Doctors with More Than 10 Appointments
+    
+     Analytical Approach
+    
+     The hospital needs to identify doctors who handled more than 10 appointments during the current month. Therefore, appointments are grouped by doctor and filtered using `HAVING`.
+    
+     Relational Schema
+    
+     ```sql
+     CREATE TABLE Doctor (
+         DoctorID INT PRIMARY KEY,
+         DoctorName VARCHAR(50),
+         Specialization VARCHAR(50)
+     );
+    
+     CREATE TABLE Appointment (
+         AppointmentID INT PRIMARY KEY,
+         DoctorID INT,
+         PatientName VARCHAR(50),
+         AppointmentDate DATE,
+         FOREIGN KEY (DoctorID) REFERENCES Doctor(DoctorID)
+     );
+     ```
+    
+     SQL Query
+    
+     ```sql
+     SELECT
+         d.DoctorID,
+         d.DoctorName,
+         COUNT(a.AppointmentID) AS TotalAppointments
+     FROM Doctor d
+     JOIN Appointment a
+     ON d.DoctorID = a.DoctorID
+     WHERE MONTH(a.AppointmentDate) = MONTH(CURDATE())
+       AND YEAR(a.AppointmentDate) = YEAR(CURDATE())
+     GROUP BY d.DoctorID, d.DoctorName
+     HAVING COUNT(a.AppointmentID) > 10;
+     ```
+    
+     Result
+    
+     Only doctors who have completed more than 10 appointments in the current month are displayed.
+    
+     ---
+    
+     # 3. E-Commerce System – Products Never Ordered
+    
+     Analytical Approach
+    
+     A product is considered **never ordered** if its `ProductID` does not appear in the order details table. A sub-query using `NOT EXISTS` provides a reliable solution.
+    
+     Relational Schema
+    
+     ```sql
+     Product(ProductID, ProductName, Price)
+    
+     OrderDetails(OrderID, ProductID, Quantity)
+     ```
+    
+     SQL Query
+    
+     ```sql
+     SELECT
+         p.ProductID,
+         p.ProductName,
+         p.Price
+     FROM Product p
+     WHERE NOT EXISTS (
+         SELECT 1
+         FROM OrderDetails od
+         WHERE od.ProductID = p.ProductID
+     );
+     ```
+    
+     Alternative Using `NOT IN`
+    
+     ```sql
+     SELECT ProductID, ProductName, Price
+     FROM Product
+     WHERE ProductID NOT IN (
+         SELECT ProductID
+         FROM OrderDetails
+     );
+     ```
+    
+     Result
+    
+     The query identifies all products that have no corresponding order record.
+    
+     ---
+    
+     # 4. University Database – Students in Both DBMS and OS
+    
+     Analytical Approach
+    
+     The requirement is to find students enrolled in **both** DBMS and Operating Systems. This can be represented using relational algebra intersection.
+    
+     Assume:
+    
+     ```text
+     Student(StudentID, StudentName)
+     Enrollment(StudentID, CourseID)
+     Course(CourseID, CourseName)
+     ```
+    
+     Relational Algebra
+    
+     Students enrolled in DBMS:
+    
+     [
+     DBMS_Students =
+     \pi_{StudentID}
+     (\sigma_{CourseName='DBMS'}
+     (Enrollment \bowtie Course))
+     ]
+    
+     Students enrolled in OS:
+    
+     [
+     OS_Students =
+     \pi_{StudentID}
+     (\sigma_{CourseName='OS'}
+     (Enrollment \bowtie Course))
+     ]
+    
+     Students enrolled in both:
+    
+     [
+     Result = DBMS_Students \cap OS_Students
+     ]
+    
+     To display student names:
+    
+     [
+     \pi_{StudentName}
+     (Student \bowtie Result)
+     ]
+    
+     Result
+    
+     The final relation contains only students who are enrolled in **both DBMS and OS**.
+    
+     ---
+    
+     # 5. Payroll System – Employees Below Department Average Salary
+    
+     Analytical Approach
+    
+     The objective is to identify employees whose salary is less than the average salary of their respective department. A view is created for reporting, while the base table is updated by increasing the qualifying employees' salary by 10%.
+    
+     Relational Schema
+    
+     ```text
+    Employee(EmpID, EmpName, DeptID, Salary)
+    ```
+    
+     Create View
+    
+     ```sql
+    CREATE VIEW Below_Average_Employees AS
+    SELECT
+        e.EmpID,
+        e.EmpName,
+        e.DeptID,
+        e.Salary
+    FROM Employee e
+    WHERE e.Salary < (
+        SELECT AVG(e2.Salary)
+        FROM Employee e2
+        WHERE e2.DeptID = e.DeptID
+    );
+    ```
+    
+     Display the View
+    
+     ```sql
+    SELECT *
+    FROM Below_Average_Employees;
+    ```
+    
+     Update Salary by 10%
+    
+     ```sql
+    UPDATE Employee e
+    SET e.Salary = e.Salary * 1.10
+    WHERE e.Salary < (
+        SELECT avg_salary
+        FROM (
+            SELECT DeptID, AVG(Salary) AS avg_salary
+            FROM Employee
+            GROUP BY DeptID
+        ) d
+        WHERE d.DeptID = e.DeptID
+    );
+    ```
+    
+     Result
+    
+     Employees earning below their respective departmental average receive a **10% salary increase**.
+    
+     ---
+    
+     # 6. Banking System – Customer Account, Transaction and Branch Information
+    
+     Analytical Approach
+    
+     The banking system contains customer, account, transaction, and branch information. Multiple `JOIN` operations are required to combine these related tables.
+    
+     Relational Schema
+    
+     ```text
+    Customer(CustomerID, CustomerName)
+   
+    Account(AccountNo, CustomerID, BranchID, Balance)
+   
+    Transaction(TransactionID, AccountNo, TransactionDate, Amount, Type)
+   
+    Branch(BranchID, BranchName, Location)
+    ```
+    
+     SQL Query
+    
+     ```sql
+    SELECT
+        c.CustomerName,
+        a.AccountNo,
+        a.Balance,
+        b.BranchName,
+        b.Location,
+        t.TransactionDate,
+        t.Amount,
+        t.Type
+    FROM Customer c
+    JOIN Account a
+        ON c.CustomerID = a.CustomerID
+    JOIN Branch b
+        ON a.BranchID = b.BranchID
+    JOIN Transaction t
+        ON a.AccountNo = t.AccountNo;
+    ```
+    
+     Result
+    
+     The query provides an integrated view of the customer's account, branch details, and transaction history.
+    
+     ---
+    
+     # 7. Retail Store – Daily Sales Summary
+    
+     Analytical Approach
+    
+     Sales must be summarized category-wise. `GROUP BY` combines sales belonging to the same category, while `HAVING` filters categories whose total sales exceed ₹10,000.
+    
+     Relational Schema
+    
+     ```text
+     Sales(SaleID, SaleDate, Category, Amount)
+     ```
+    
+     SQL Query
+    
+     ```sql
+     SELECT
+         Category,
+         SUM(Amount) AS TotalSales
+     FROM Sales
+     WHERE SaleDate = CURDATE()
+     GROUP BY Category
+     HAVING SUM(Amount) > 10000;
+     ```
+    
+     Result
+    
+     The query reports today's product categories whose total sales are greater than **₹10,000**.
+    
+     ---
+    
+     # 8. Library System – Tuple Relational Calculus
+    
+     Analytical Approach
+    
+     The objective is to identify members who have borrowed books from **all genres**. This requires a universal condition.
+    
+     Assume:
+    
+     ```text
+    Member(MemberID, MemberName)
+   
+    Book(BookID, Title, Genre)
+   
+    Borrow(MemberID, BookID)
+    ```
+    
+     Tuple Relational Calculus
+    
+     [
+     {m \mid Member(m)
+ERROR:
+Unknown command '\m'.
+     \land
+ERROR:
+Unknown command '\l'.
+     \forall b
+ERROR:
+Unknown command '\f'.
+     (
+     Book(b)
+     \rightarrow
+ERROR 1049 (42000): Unknown database 'ightarrow'
+mysql> \exists br
+ERROR:
+Unknown command '\e'.
+     (
+     Borrow(br)
+     \land br.MemberID=m.MemberID
+ERROR:
+Unknown command '\l'.
+     \land br.BookID=b.BookID
+ERROR:
+Unknown command '\l'.
+     )
+     )}
+     ]
+    
+     Interpretation
+    
+     For every book in the library, there must exist a borrowing record associated with the member.
+    
+     Result
+    
+     The expression returns members who have borrowed **every book in the library**.
+    
+     > If the intended meaning is literally **at least one book from every genre**, the condition can be expressed by quantifying over genres rather than individual books.
+    
+     ---
+    
+     # 9. Inventory Management – CHECK and FOREIGN KEY Constraints
+    
+     Analytical Approach
+    
+     The inventory system must ensure:
+    
+     1. Quantity cannot be negative.
+     2. Every product must belong to a valid category.
+     3. Invalid category references must be rejected.
+    
+     Table with Constraints
+    
+     ```sql
+    CREATE TABLE Category (
+        CategoryID INT PRIMARY KEY,
+        CategoryName VARCHAR(50)
+    );
+    ```
+    
+     ```sql
+    CREATE TABLE Product (
+        ProductID INT PRIMARY KEY,
+        ProductName VARCHAR(50),
+        Quantity INT,
+        CategoryID INT,
+   
+        CONSTRAINT chk_quantity
+        CHECK (Quantity >= 0),
+   
+        CONSTRAINT fk_category
+        FOREIGN KEY (CategoryID)
+        REFERENCES Category(CategoryID)
+    );
+    ```
+    
+     Enforcement of CHECK Constraint
+    
+     ```sql
+    INSERT INTO Product
+    VALUES (101, 'Keyboard', -5, 1);
+    ```
+    
+     This insertion is **rejected** because:
+    
+     ```text
+    Quantity >= 0
+    ```
+    
+     is violated.
+    
+     Enforcement of FOREIGN KEY
+    
+     ```sql
+    INSERT INTO Product
+    VALUES (102, 'Mouse', 20, 999);
+    ```
+    
+     This insertion is **rejected** if `CategoryID = 999` does not exist in `Category`.
+    
+     Result
+    
+     The `CHECK` constraint maintains valid inventory quantities, while the `FOREIGN KEY` maintains referential integrity between products and categories.
+    
+     ---
+    
+     # 10. HR System – Attendance and Performance Summary Views
+    
+     Analytical Approach
+    
+     The HR system requires separate views for:
+    
+     * Monthly attendance summary.
+     * Employee performance summary.
+    
+     Assume:
+    
+     ```text
+    Employee(EmpID, EmpName, DeptID)
+   
+    Attendance(AttendanceID, EmpID, AttendanceDate, Status)
+   
+    Performance(PerformanceID, EmpID, ReviewDate, Score)
+    ```
+    
+     Monthly Attendance View
+    
+     ```sql
+    CREATE VIEW Monthly_Attendance_Summary AS
+    SELECT
+        e.EmpID,
+        e.EmpName,
+        YEAR(a.AttendanceDate) AS Year,
+        MONTH(a.AttendanceDate) AS Month,
+        COUNT(*) AS TotalDays,
+        SUM(CASE
+            WHEN a.Status = 'Present' THEN 1
+            ELSE 0
+        END) AS PresentDays
+    FROM Employee e
+    JOIN Attendance a
+    ON e.EmpID = a.EmpID
+    GROUP BY
+        e.EmpID,
+        e.EmpName,
+        YEAR(a.AttendanceDate),
+        MONTH(a.AttendanceDate);
+    ```
+    
+     Display Attendance Summary
+    
+     ```sql
+    SELECT *
+    FROM Monthly_Attendance_Summary;
+    ```
+    
+     ---
+    
+     Performance Summary View
+    
+     ```sql
+    CREATE VIEW Performance_Summary AS
+    SELECT
+        e.EmpID,
+        e.EmpName,
+        AVG(p.Score) AS AverageScore,
+        COUNT(p.PerformanceID) AS NumberOfReviews
+    FROM Employee e
+    JOIN Performance p
+    ON e.EmpID = p.EmpID
+    GROUP BY
+        e.EmpID,
+        e.EmpName;
+    ```
+    
+     Display Performance Summary
+    
+     ```sql
+    SELECT *
+    FROM Performance_Summary;
+    ```
+    
+     Result
+    
+     The HR department can use these views to quickly analyze **monthly attendance** and **employee performance** without repeatedly writing complex queries.
+    
+ 
+    
+     Overall Analytical Method
+    
+     For each scenario, the solution follows a professional DBMS problem-solving process:
+    
+     **Scenario Analysis → Identify Entities → Define Relationships → Design Relations → Apply Relational Algebra/Calculus → Construct SQL → Apply Constraints/Aggregation → Generate Required Result**.
+    

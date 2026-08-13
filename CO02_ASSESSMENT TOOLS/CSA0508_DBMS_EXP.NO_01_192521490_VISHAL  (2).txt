@@ -1,0 +1,901 @@
+Enter password: 
+Welcome to the  monitor.  Commands end with ; or \g.
+Your  connection id is 10
+Server version: 8.0.46  Community Server  GPL
+
+Copyright (c) 2000, 2026, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+> Absolutely. I’ll structure all 10 questions in a formal collegeassignment format, with consistent headings, analytical reasoning, correct SQL/relational algebra, and conclusions.
+    
+      DBMS – ANALYTICAL PROBLEM SOLVING ASSIGNMENT
+    
+      Course: Database Management Systems
+    
+     
+    
+      1. Application of Relational Algebra Operations
+    
+      Problem Statement
+    
+     Apply the relational algebra operations Selection (σ), Projection (π), Union (∪), Set Difference (−), Cartesian Product (×), and Join (⋈) on the given Employee and Department relations to retrieve the required records.
+    
+      Given Relations
+    
+     EMPLOYEE(EmpID, EmpName, DeptID, Salary)
+    
+      EmpID  EmpName  DeptID  Salary 
+      :    :  : 
+        101  Arun         10   55000 
+        102  Bala         20   45000 
+        103  Charan       10   65000 
+        104  Divya        30   50000 
+    
+     DEPARTMENT(DeptID, DeptName)
+    
+      DeptID  DeptName 
+      :   
+          10  IT       
+          20  HR       
+          30  Finance  
+    
+      Analysis
+    
+     Relational algebra provides a formal procedure for retrieving and manipulating records from relational databases. Each operation performs a specific task.
+    
+      a) Selection (σ)
+    
+     Find employees earning more than ₹50,000.
+    
+     [
+     \sigma_{Salary>50000}(EMPLOYEE)
+
+C:\Program Files\\ Server 8.0\bin\.exe  Ver 8.0.46 for Win64 on x86_64 ( Community Server  GPL)
+
+Connection id:          10
+Current database:
+Current user:           root@localhost
+SSL:                    Cipher in use is TLS_AES_256_GCM_SHA384
+Using delimiter:        ;
+Server version:         8.0.46  Community Server  GPL
+Protocol version:       10
+Connection:             localhost via TCP/IP
+Server characterset:    utf8mb4
+Db     characterset:    utf8mb4
+Client characterset:    cp850
+Conn.  characterset:    cp850
+TCP port:               3306
+Binary data as:         Hexadecimal
+Uptime:                 3 days 18 hours 7 min 51 sec
+
+Threads: 3  Questions: 19  Slow queries: 0  Opens: 119  Flush tables: 3  Open tables: 38  Queries per second avg: 0.000
+
+
+     ]
+    
+     Result: Arun and Charan.
+    
+      b) Projection (π)
+    
+     Display only employee names and salaries.
+    
+     [
+     \pi_{EmpName,Salary}(EMPLOYEE)
+
+Absolutely. I?ll structure all 10 questions in a formal collegeassignment format, with consistent headings, analytical reasoning, correct SQL/relational algebra, and conclusions.
+
+
+
+
+
+
+
+
+
+
+
+Apply the relational algebra operations Selection (?), Projection (?), Union (?), Set Difference (?), Cartesian Product (×), and Join (?) on the given Employee and Department relations to retrieve the required records.
+
+
+
+EMPLOYEE(EmpID, EmpName, DeptID, Salary)
+
+ EmpID  EmpName  DeptID  Salary 
+ :  
+   101  Arun         10   55000 
+   102  Bala         20   45000 
+   103  Charan       10   65000 
+   104  Divya        30   50000 
+
+DEPARTMENT(DeptID, DeptName)
+
+ DeptID  DeptName 
+ :  
+     10  IT       
+     20  HR       
+     30  Finance  
+
+
+
+Relational algebra provides a formal procedure for retrieving and manipulating records from relational databases. Each operation performs a specific task.
+
+
+
+Find employees earning more than ?50,000.
+
+[
+igma_{Salary>50000}(EMPLOYEE)
+]
+
+Result: Arun and Charan.
+
+
+
+Display only employee names and salaries.
+
+[
+
+
+     ]
+    
+      c) Union (∪)
+    
+     Find employees belonging to Department 10 or Department 20.
+    
+     [
+     \sigma_{DeptID=10}(EMPLOYEE)
+
+C:\Program Files\\ Server 8.0\bin\.exe  Ver 8.0.46 for Win64 on x86_64 ( Community Server  GPL)
+
+Connection id:          10
+Current database:
+Current user:           root@localhost
+SSL:                    Cipher in use is TLS_AES_256_GCM_SHA384
+Using delimiter:        ;
+Server version:         8.0.46  Community Server  GPL
+Protocol version:       10
+Connection:             localhost via TCP/IP
+Server characterset:    utf8mb4
+Db     characterset:    utf8mb4
+Client characterset:    cp850
+Conn.  characterset:    cp850
+TCP port:               3306
+Binary data as:         Hexadecimal
+Uptime:                 3 days 18 hours 7 min 51 sec
+
+Threads: 3  Questions: 22  Slow queries: 0  Opens: 119  Flush tables: 3  Open tables: 38  Queries per second avg: 0.000
+
+
+     \cup
+     \sigma_{DeptID=20}(EMPLOYEE)
+
+C:\Program Files\\ Server 8.0\bin\.exe  Ver 8.0.46 for Win64 on x86_64 ( Community Server  GPL)
+
+Connection id:          10
+Current database:
+Current user:           root@localhost
+SSL:                    Cipher in use is TLS_AES_256_GCM_SHA384
+Using delimiter:        ;
+Server version:         8.0.46  Community Server  GPL
+Protocol version:       10
+Connection:             localhost via TCP/IP
+Server characterset:    utf8mb4
+Db     characterset:    utf8mb4
+Client characterset:    cp850
+Conn.  characterset:    cp850
+TCP port:               3306
+Binary data as:         Hexadecimal
+Uptime:                 3 days 18 hours 7 min 51 sec
+
+Threads: 3  Questions: 25  Slow queries: 0  Opens: 119  Flush tables: 3  Open tables: 38  Queries per second avg: 0.000
+
+
+     ]
+    
+      d) Set Difference (−)
+    
+     Find employees who do not belong to Department 10.
+    
+     [
+     EMPLOYEE\sigma_{DeptID=10}(EMPLOYEE)
+
+C:\Program Files\\ Server 8.0\bin\.exe  Ver 8.0.46 for Win64 on x86_64 ( Community Server  GPL)
+
+Connection id:          10
+Current database:
+Current user:           root@localhost
+SSL:                    Cipher in use is TLS_AES_256_GCM_SHA384
+Using delimiter:        ;
+Server version:         8.0.46  Community Server  GPL
+Protocol version:       10
+Connection:             localhost via TCP/IP
+Server characterset:    utf8mb4
+Db     characterset:    utf8mb4
+Client characterset:    cp850
+Conn.  characterset:    cp850
+TCP port:               3306
+Binary data as:         Hexadecimal
+Uptime:                 3 days 18 hours 7 min 51 sec
+
+Threads: 3  Questions: 28  Slow queries: 0  Opens: 119  Flush tables: 3  Open tables: 38  Queries per second avg: 0.000
+
+
+     ]
+    
+      e) Cartesian Product (×)
+    
+     Generate all possible combinations of employees and departments.
+    
+     [
+     EMPLOYEE\times DEPARTMENT
+Outfile disabled.
+     ]
+    
+      f) Join (⋈)
+    
+     Display employee names along with their department names.
+    
+     [
+     EMPLOYEE
+     \bowtie_{EMPLOYEE.DeptID=DEPARTMENT.DeptID}
+ERROR:
+Unknown command '\b'.
+     DEPARTMENT
+     ]
+    
+      Conclusion
+    
+     The required relational algebra operations successfully demonstrate how records can be selected, projected, combined, compared, and joined without using SQL.
+    
+     
+    
+      2. SQL DDL Statements with Appropriate Constraints
+    
+      Problem Statement
+    
+     Create the STUDENT and DEPARTMENT tables with appropriate integrity constraints.
+    
+      Analysis
+    
+     The database must maintain:
+    
+      Unique identification of students and departments.
+      Mandatory student and department information.
+      Valid department references for students.
+      Prevention of duplicate department names.
+    
+      SQL Solution
+    
+     sql
+     CREATE TABLE DEPARTMENT (
+         DeptID INT PRIMARY KEY,
+         DeptName VARCHAR(50) NOT NULL UNIQUE
+     );
+    
+     CREATE TABLE STUDENT (
+         SID INT PRIMARY KEY,
+         Name VARCHAR(100) NOT NULL,
+         DOB DATE NOT NULL,
+         DeptID INT NOT NULL,
+    
+         CONSTRAINT FK_Student_Department
+             FOREIGN KEY (DeptID)
+             REFERENCES DEPARTMENT(DeptID)
+     );
+     
+    
+      Constraint Analysis
+    
+      Constraint   Purpose                             
+         
+      PRIMARY KEY  Uniquely identifies each record     
+      NOT NULL     Prevents missing mandatory values   
+      UNIQUE       Prevents duplicate department names 
+      FOREIGN KEY  Maintains referential integrity     
+    
+      Conclusion
+    
+     The DDL statements create a structured database in which entity and referential integrity are properly enforced.
+    
+     
+    
+      3. SQL Queries Using GROUP BY, HAVING and Aggregate Functions
+    
+      Problem Statement
+    
+     Formulate SQL queries using GROUP BY, HAVING, and the aggregate functions COUNT, SUM, AVG, MAX, and MIN on a Sales dataset.
+    
+      Given Relation
+    
+     SALES(SaleID, Product, Category, Quantity, Amount)
+    
+      Analysis
+    
+     Aggregate functions summarize numerical data, while GROUP BY creates groups based on a specified attribute. HAVING filters the grouped results.
+    
+      a) COUNT
+    
+     Find the number of sales in each category.
+    
+     sql
+     SELECT Category, COUNT() AS Total_Sales
+     FROM SALES
+     GROUP BY Category;
+     
+    
+      b) SUM
+    
+     Find the total sales amount for each category.
+    
+     sql
+     SELECT Category, SUM(Amount) AS Total_Amount
+     FROM SALES
+     GROUP BY Category;
+     
+    
+      c) AVG
+    
+     Find the average sales amount for each category.
+    
+     sql
+     SELECT Category, AVG(Amount) AS Average_Amount
+     FROM SALES
+     GROUP BY Category;
+     
+    
+      d) MAX
+    
+     Find the maximum sale amount in each category.
+    
+     sql
+     SELECT Category, MAX(Amount) AS Maximum_Sale
+     FROM SALES
+     GROUP BY Category;
+     
+    
+      e) MIN
+    
+     Find the minimum sale amount in each category.
+    
+     sql
+     SELECT Category, MIN(Amount) AS Minimum_Sale
+     FROM SALES
+     GROUP BY Category;
+     
+    
+      f) GROUP BY with HAVING
+    
+     Find categories whose total sales exceed ₹1,00,000.
+    
+     sql
+     SELECT Category, SUM(Amount) AS Total_Amount
+     FROM SALES
+     GROUP BY Category
+     HAVING SUM(Amount) > 100000;
+     
+    
+      Conclusion
+    
+     The combination of grouping and aggregate functions enables meaningful analysis of sales data, while HAVING allows conditions to be applied to grouped results.
+    
+     
+    
+      4. Correlated Subquery for Departmentwise Salary Comparison
+    
+      Problem Statement
+    
+     Find employees earning more than the average salary of their own department.
+    
+      Analysis
+    
+     The average salary must be calculated separately for each employee's department. Since the inner query refers to the department of the current employee in the outer query, a correlated subquery is required.
+    
+      SQL Solution
+    
+     sql
+     SELECT E.EmpID,
+            E.EmpName,
+            E.DeptID,
+            E.Salary
+     FROM EMPLOYEE E
+     WHERE E.Salary > (
+         SELECT AVG(E2.Salary)
+         FROM EMPLOYEE E2
+         WHERE E2.DeptID = E.DeptID
+     );
+     
+    
+      Explanation
+    
+     1. The outer query selects an employee.
+     2. The inner query calculates the average salary of that employee's department.
+     3. The employee's salary is compared with the calculated average.
+     4. Only employees earning above the department average are returned.
+    
+      Conclusion
+    
+     The correlated subquery provides an effective solution for departmentspecific salary comparison.
+    
+     
+    
+      5. Application of Different JOIN Operations
+    
+      Problem Statement
+    
+     Apply INNER JOIN, LEFT OUTER JOIN, RIGHT OUTER JOIN, FULL OUTER JOIN, and CROSS JOIN on Employee and Project tables.
+    
+      Given Relations
+    
+     EMPLOYEE(EmpID, EmpName, ProjectID)
+    
+     PROJECT(ProjectID, ProjectName)
+    
+      a) INNER JOIN
+    
+     Retrieve employees who are assigned to a project.
+    
+     sql
+     SELECT E.EmpName, P.ProjectName
+     FROM EMPLOYEE E
+     INNER JOIN PROJECT P
+     ON E.ProjectID = P.ProjectID;
+     
+    
+      b) LEFT OUTER JOIN
+    
+     Retrieve all employees, including employees who are not assigned to a project.
+    
+     sql
+     SELECT E.EmpName, P.ProjectName
+     FROM EMPLOYEE E
+     LEFT JOIN PROJECT P
+     ON E.ProjectID = P.ProjectID;
+     
+    
+      c) RIGHT OUTER JOIN
+    
+     Retrieve all projects, including projects that have no employees.
+    
+     sql
+     SELECT E.EmpName, P.ProjectName
+     FROM EMPLOYEE E
+     RIGHT JOIN PROJECT P
+     ON E.ProjectID = P.ProjectID;
+     
+    
+      d) FULL OUTER JOIN
+    
+     Retrieve all employees and all projects.
+    
+     sql
+     SELECT E.EmpName, P.ProjectName
+     FROM EMPLOYEE E
+     FULL OUTER JOIN PROJECT P
+     ON E.ProjectID = P.ProjectID;
+     
+    
+     Note:  does not directly support FULL OUTER JOIN. It can be implemented using LEFT JOIN, RIGHT JOIN, and UNION.
+    
+      e) CROSS JOIN
+    
+     Generate every possible combination of employees and projects.
+    
+     sql
+     SELECT E.EmpName, P.ProjectName
+     FROM EMPLOYEE E
+     CROSS JOIN PROJECT P;
+     
+    
+      Comparison
+    
+      JOIN             Purpose                                  
+         
+      INNER JOIN       Returns matching records                 
+      LEFT JOIN        Returns all records from the left table  
+      RIGHT JOIN       Returns all records from the right table 
+      FULL OUTER JOIN  Returns records from both tables         
+      CROSS JOIN       Produces all possible combinations       
+    
+      Conclusion
+    
+     Different join operations provide different methods of combining related or unrelated records depending on the information required.
+    
+     
+    
+      6. Creation and Querying of DeptSalaryView
+    
+      Problem Statement
+    
+     Create a view named DeptSalaryView that displays the department name, total number of employees, and average salary.
+    
+      Analysis
+    
+     A view provides a virtual table based on a query. It simplifies repeated access to complex join and aggregation operations.
+    
+      SQL Solution
+    
+     sql
+     CREATE VIEW DeptSalaryView AS
+     SELECT
+         D.DeptName,
+         COUNT(E.EmpID) AS Total_Employees,
+         AVG(E.Salary) AS Average_Salary
+     FROM DEPARTMENT D
+     LEFT JOIN EMPLOYEE E
+     ON D.DeptID = E.DeptID
+     GROUP BY D.DeptID, D.DeptName;
+     
+    
+      Query the View
+    
+     Retrieve departments with an average salary greater than ₹50,000.
+    
+     sql
+     SELECT 
+     FROM DeptSalaryView
+     WHERE Average_Salary > 50000;
+     
+    
+      Conclusion
+    
+     The view provides a simplified and reusable representation of departmentwise employee salary information.
+    
+     
+    
+      7. Relational Algebra for Students Enrolled in All Courses
+    
+      Problem Statement
+    
+     Find the names of students who are enrolled in all courses offered by the institution.
+    
+      Given Relations
+    
+     STUDENT(SID, StudentName)
+    
+     ENROLLMENT(SID, CourseID)
+    
+     COURSE(CourseID, CourseName)
+    
+      Analysis
+    
+     The phrase “enrolled in all courses” indicates that relational division is required. Relational division identifies students associated with every course in the COURSE relation.
+    
+      Relational Algebra
+    
+     First obtain the students who have course enrollments:
+    
+     [
+     \pi_{SID,CourseID}(ENROLLMENT)
+     ]
+    
+     Obtain all available courses:
+    
+     [
+     \pi_{CourseID}(COURSE)
+     ]
+    
+     Perform relational division:
+    
+     [
+     \pi_{SID,CourseID}(ENROLLMENT)
+     \div
+     \pi_{CourseID}(COURSE)
+     ]
+    
+     Finally, retrieve student names:
+    
+     [
+     \boxed{
+     STUDENT
+     \bowtie
+     \left[
+     \pi_{SID,CourseID}(ENROLLMENT)
+     \div
+     \pi_{CourseID}(COURSE)
+     \right]
+     }
+     ]
+    
+      Conclusion
+    
+     Relational division is the appropriate operation because the requirement involves satisfying a condition for every course offered.
+    
+     
+    
+      8. SQL DML Statements with Integrity Constraint Enforcement
+    
+      Problem Statement
+    
+     Demonstrate INSERT, UPDATE, and DELETE operations while maintaining database integrity.
+    
+      Given Relations
+    
+     DEPARTMENT(DeptID, DeptName)
+    
+     STUDENT(SID, Name, DOB, DeptID)
+    
+      a) INSERT
+    
+     Insert a department.
+    
+     sql
+     INSERT INTO DEPARTMENT
+     VALUES (10, 'IT');
+     
+    
+     Insert a student belonging to the existing department.
+    
+     sql
+     INSERT INTO STUDENT
+     VALUES (101, 'Arun', '20070510', 10);
+     
+    
+      Invalid INSERT
+    
+     sql
+     INSERT INTO STUDENT
+     VALUES (102, 'Bala', '20070615', 99);
+     
+    
+     This operation is rejected because DeptID = 99 does not exist in the DEPARTMENT table.
+    
+      b) UPDATE
+    
+     Change the department of a student.
+    
+     sql
+     UPDATE STUDENT
+     SET DeptID = 10
+     WHERE SID = 101;
+     
+    
+      c) DELETE
+    
+     Delete a student record.
+    
+     sql
+     DELETE FROM STUDENT
+     WHERE SID = 101;
+     
+    
+      Integrity Analysis
+    
+     The operations must satisfy:
+    
+      Entity Integrity: Primary key values must be unique and nonnull.
+      Referential Integrity: Foreign key values must refer to existing records.
+      Domain Integrity: Values must conform to their defined data types and restrictions.
+    
+      Conclusion
+    
+     DML operations modify database records while integrity constraints prevent invalid or inconsistent data.
+    
+     
+    
+      9. Tuple Relational Calculus
+    
+      Problem Statement
+    
+     Find all employees who work in the IT department and earn more than ₹50,000.
+    
+      Given Relations
+    
+     EMPLOYEE(EmpID, EmpName, DeptID, Salary)
+    
+     DEPARTMENT(DeptID, DeptName)
+    
+      Analysis
+    
+     The query requires two conditions:
+    
+     1. Employee must belong to the IT department.
+     2. Employee salary must be greater than ₹50,000.
+    
+      Tuple Relational Calculus Expression
+    
+     [
+     \boxed{
+     {e \mid EMPLOYEE(e)
+     \land
+     \exists d
+     (
+     DEPARTMENT(d)
+     \land e.DeptID=d.DeptID
+     \land d.DeptName='IT'
+     \land e.Salary>50000
+     )
+     }
+     }
+     ]
+    
+      Explanation
+    
+     The expression selects an employee tuple e for which there exists a department tuple d such that:
+    
+      Both have the same department ID.
+      The department name is IT.
+      The employee salary is greater than ₹50,000.
+    
+      Conclusion
+    
+     Tuple relational calculus expresses the required result declaratively by specifying the conditions that the required employee tuples must satisfy.
+    
+     
+    
+      10. Airline Reservation System – Relational Schema and SQL Queries
+    
+      Problem Statement
+    
+     Design a relational schema for an Airline Reservation System and write five SQL queries demonstrating joins, subqueries, and views.
+    
+      A. Problem Analysis
+    
+     An airline reservation system must maintain information about passengers, airports, flights, bookings, and tickets. The database should establish relationships between these entities using primary and foreign keys.
+    
+      B. Relational Schema
+    
+      PASSENGER
+    
+     PASSENGER(PassengerID, Name, Email, Phone)
+    
+      AIRPORT
+    
+     AIRPORT(AirportID, AirportName, City)
+    
+      FLIGHT
+    
+     FLIGHT(FlightID, FlightNo, SourceAirport, DestinationAirport, FlightDate, Seats)
+    
+      BOOKING
+    
+     BOOKING(BookingID, PassengerID, FlightID, BookingDate, Status)
+    
+      TICKET
+    
+     TICKET(TicketID, BookingID, SeatNo, Fare)
+    
+      C. Relationships
+    
+     text
+     PASSENGER
+         
+          1 : M
+         
+     BOOKING
+         
+          M : 1
+         
+     FLIGHT
+         
+          M : 1
+         
+     AIRPORT
+     
+    
+     A passenger can make multiple bookings, while each booking belongs to one passenger. Each booking is associated with a particular flight.
+    
+     
+    
+      Query 1 – INNER JOIN
+    
+     Display passenger names and their booking status.
+    
+     sql
+     SELECT
+         P.Name,
+         B.BookingID,
+         B.Status
+     FROM PASSENGER P
+     INNER JOIN BOOKING B
+     ON P.PassengerID = B.PassengerID;
+     
+    
+     
+    
+      Query 2 – Multiple JOINs
+    
+     Display passenger name, flight number, and booking status.
+    
+     sql
+     SELECT
+         P.Name,
+         F.FlightNo,
+         B.Status
+     FROM PASSENGER P
+     JOIN BOOKING B
+     ON P.PassengerID = B.PassengerID
+     JOIN FLIGHT F
+     ON B.FlightID = F.FlightID;
+     
+    
+     
+    
+      Query 3 – Subquery
+    
+     Find passengers who have booked tickets costing more than ₹10,000.
+    
+     sql
+     SELECT Name
+     FROM PASSENGER
+     WHERE PassengerID IN (
+         SELECT B.PassengerID
+         FROM BOOKING B
+         JOIN TICKET T
+         ON B.BookingID = T.BookingID
+         WHERE T.Fare > 10000
+     );
+     
+    
+     
+    
+      Query 4 – Aggregate Subquery
+    
+     Find tickets whose fare is greater than the average ticket fare.
+    
+     sql
+     SELECT TicketID, SeatNo, Fare
+     FROM TICKET
+     WHERE Fare > (
+         SELECT AVG(Fare)
+         FROM TICKET
+     );
+     
+    
+     
+    
+      Query 5 – Creating and Using a View
+    
+     Create a view containing passenger booking information.
+    
+     sql
+     CREATE VIEW PassengerBookingView AS
+     SELECT
+         P.Name,
+         F.FlightNo,
+         F.FlightDate,
+         B.Status,
+         T.SeatNo,
+         T.Fare
+     FROM PASSENGER P
+     JOIN BOOKING B
+     ON P.PassengerID = B.PassengerID
+     JOIN FLIGHT F
+     ON B.FlightID = F.FlightID
+     JOIN TICKET T
+     ON B.BookingID = T.BookingID;
+     
+    
+     Query the view:
+    
+     sql
+     SELECT 
+     FROM PassengerBookingView
+     WHERE Fare > 10000;
+     
+    
+      Conclusion
+    
+     The Airline Reservation System demonstrates how relational database concepts can be integrated into a practical application. The schema establishes relationships between passengers, bookings, flights, airports, and tickets, while SQL joins, subqueries, and views provide efficient mechanisms for retrieving and analyzing reservation information.
+    
+     
+    
+      OVERALL CONCLUSION
+    
+     The above problems demonstrate the practical application of fundamental DBMS concepts, including relational algebra, DDL, DML, integrity constraints, aggregate functions, grouping, joins, correlated subqueries, tuple relational calculus, views, and relational database design. These techniques provide a systematic approach for designing reliable databases and retrieving meaningful information from structured data.
+    
+
+
+
+
+
+
+
+
+
+
+
